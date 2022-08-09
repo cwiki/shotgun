@@ -28,7 +28,10 @@ async function getUrls() {
     let urls = [];
     const textContent = await readFileSync(path.join(getOptions().directory, 'urls.csv'), "utf8")
     for (let row of textContent.split("\n")) {
-        const r = row.split(",")[0].toString().replaceAll('"', '')
+        const rs = row.split(",") 
+        // Skip entries that are not text/html for Screaming Frog Inputs
+        if (rs[1] && !rs[1].includes('text/html')) continue
+        const r = rs[0].toString().replaceAll('"', '')
         if (r.slice(0, 4) === 'http') urls.push(r);
     }
     if (getOptions().max_urls) {
