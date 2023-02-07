@@ -4,6 +4,8 @@ const path = require('path');
 const { exit } = require('process');
 process.setMaxListeners(200);
 
+const { CHROME_BIN } = process.env;
+
 let system_inputs = null
 function getOptions () {
     if (system_inputs === null) {
@@ -92,10 +94,15 @@ async function shotgunCapture(urlsPromise) {
 
     const urls = await urlsPromise
     for (const url of urls) {
-        const browser = await puppeteer.launch({
+        // const browser = await puppeteer.launch({
+        //     headless: true,
+        //     timeout: 2000
+        // });
+        const browser = await puppeteer.launch(Object.assign({}, {
             headless: true,
             timeout: 2000
-        });
+        }, { executablePath: CHROME_BIN }));
+
         const page = await browser.newPage();
         page.setViewport({
             width: 1920,

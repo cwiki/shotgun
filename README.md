@@ -9,6 +9,11 @@ Node.js 16.16.0+
 Add a CSV file called `urls.csv` with the urls you would like to snapshot (must be first column).
 Hint: I used Screaming Frog to generate url lists for my clients.
 
+###### Required chrome version will be required
+https://github.com/puppeteer/puppeteer/issues/1347
+`brew install -g puppeteer`
+`brew install --cask puppetry`
+
 ## Run application
 `node index.js --directory ./clients/MY_CLIENT
 
@@ -16,3 +21,4 @@ Hint: I used Screaming Frog to generate url lists for my clients.
 Required: --directory [string]
 
 Optional: --max_urls [number] # use this to do a couple captures as a test trial before grabbing the whole site
+
