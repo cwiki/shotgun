@@ -1,12 +1,11 @@
 {
   "dependencies": {
-    "puppeteer": "^16.1.0"
+    "puppeteer": "^23.8.0"
   },
   "name": "shotgun",
   "version": "0.1.0",
   "description": "Node.js app that takes a series of website screenshots to keep track of client projects.",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer');
 const { readFileSync, existsSync, mkdirSync } = require("fs");
 const path = require('path');
 const { exit } = require('process');
+const {setTimeout} = require("node:timers/promises");
+
 process.setMaxListeners(200);
 
 const { CHROME_BIN } = process.env;
@@ -32,7 +34,7 @@ async function getUrls() {
     for (let row of textContent.split("\n")) {
         const rs = row.split(",") 
         // Skip entries that are not text/html for Screaming Frog Inputs
-        if (rs[1] && !rs[1].includes('text/html')) continue
+        if (rs[4] && !rs[4].includes('text/html')) continue
         const r = rs[0].toString().replaceAll('"', '')
         if (r.slice(0, 4) === 'http') urls.push(r);
     }
@@ -113,7 +115,7 @@ async function shotgunCapture(urlsPromise) {
             waitUntil: 'networkidle2'
         });
 
-        await page.waitForTimeout(200)
+        await setTimeout(200);
         await autoScroll(page)
         const p = url
             .replace('https', 'http')
